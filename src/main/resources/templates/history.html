@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>GitHub Search User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="nav-style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--    this is to prevent error in testing enviorment-->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+        .button1 {
+            background-color: white;
+            color: black;
+            border: 2px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+    </label>
+    <label class="logo">GitHub Search Model</label>
+    <ul>
+        <li><a href="/search">Search</a></li>
+        <li><a href="/">History</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+
+<div style="margin-top:3%" class="container">
+    <h1></h1>
+    <br/>
+    <!--  The saved block    -->
+    <div class="col-6 d-flex ">
+        <div class="w-100 shadow p-3 mb-5 rounded bg-light">
+            <div class="alert alert-info font-weight-bold">History</div>
+            <ul th:each="user : ${users}">
+                <a th:href="${user.getLink()}">
+                    <span th:text="${user.getLogin()}"></span>
+                </a>
+                :
+                <span th:text="${user.getSearchCounter()}"></span>
+            </ul>
+            <br/>
+        </div>
+    </div>
+    <form action="/deleteAll" method="get">
+        <button type="submit" class="button button1 ">Delete History</button>
+    </form>
+    <br/>
+
+</div>
+
+
+</body>
+</html>

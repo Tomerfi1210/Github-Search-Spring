@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>GitHub Search User</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="nav-style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--    this is to prevent error in testing enviorment-->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button5 {
+            background-color: white;
+            color: black;
+            border: 2px solid #555555;
+        }
+    </style>
+</head>
+<body>
+<nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+    </label>
+    <label class="logo">GitHub Search Model</label>
+    <ul>
+        <li><a href="/">Search</a></li>
+        <li><a href="/history">History</a></li>
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</nav>
+
+
+<div style="margin-top:5%" class="container">
+    <h2 class="mb-5">Github Search Engine</h2>
+    <th:block th:if="${error_input==true}">
+        <div class="alert alert-danger">
+            <strong>Error!</strong> Input is empty !
+        </div>
+    </th:block>
+    <div class="row">
+        <div class="col-md-6">
+            <form action="/search"  method="post">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="userName" class="col-form-label">User</label>
+                        <input type="text" name="username" class="form-control" id="username" required>
+                    </div>
+                </div>
+                <th:block th:if="${!exist}">
+                    user doesnt exist
+                </th:block>
+
+                <th:block th:if="${isEmpty}">
+                    user can't be empty
+                </th:block>
+                <div class="row">
+                    <div class="col-md-6 mt-5">
+                        <input type="submit" class="button button5" value="Search">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <table class="table table-striped table-responsive-md">
+                <thead>
+                <tr>
+                    <th>Login</th>
+                    <th>Followers</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${hasUser}">
+                    <td th:text="${username}"></td>
+                    <td th:text="${followers}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<section></section>
+</body>
+</html>
